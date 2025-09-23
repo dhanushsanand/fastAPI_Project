@@ -1,15 +1,15 @@
 from pydantic import BaseModel, EmailStr, AnyUrl, Field
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Annotated
 
 class Patient(BaseModel):
-  name:str
+  name: Annotated[str, Field(max_length=50,title='Name of the patient',description='Enter the name of the patient in less than 50 characters', examples=['Dhanush','Shivanand'])]
   email:EmailStr
-  linkedin_url: AnyUrl
+  linkedin_url: Optional[AnyUrl] = None
   age:int
-  weight:float = Field(gt=0, lt=120)
-  allergies:Optional[List[str]] = Field(max_length=5)
+  weight:Annotated[float, Field(ge=0,le=120, strict=True)]
+  allergies: Annotated[Optional[List[str]], Field(default=None, max_length=5)]
   contact_details:Dict[str,str]
-  married:Optional[bool] = False
+  married: Annotated[bool, Field(default=None, description='Is the patient married or not')]
 
 def insert_patient_data(patient:Patient):
   print(patient.name)
@@ -19,7 +19,7 @@ def insert_patient_data(patient:Patient):
 
 
 #'allergies':['Gluten','Pollen']
-patient_info = {'name':'Dhanush', 'age':30, 'weight':76.2,'email':'dhanush@gmail.com', 'contact_details':{'phone_num':'1234567890','email':'abc@gmail.com'}}
+patient_info = {'name':'Dhanush', 'age':30, 'weight':76.2,'email':'dhanush@gmail.com', 'contact_details':{'phone_num':'1234567890'}, 'married':'True'}
 
 patient1 = Patient(**patient_info)
 
