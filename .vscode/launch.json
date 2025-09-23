@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "type": "debugpy",
+      "request": "launch",
+      "name": "Launch FastAPI",
+      "module": "uvicorn",
+      "args": [
+        "main:app",
+        "--reload"
+      ],
+      "python": "${workspaceFolder}/myvenv/bin/python",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
