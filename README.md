@@ -4,3 +4,8 @@
 
 **Simulated a DB using JSON file and performed CRUD operations on it using APIs built.**
 
+**To Run:**
+ git clone the repo
+ 
+
+
