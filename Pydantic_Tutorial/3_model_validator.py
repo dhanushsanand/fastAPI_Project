@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, AnyUrl, field_validator, model_validator
+from pydantic import BaseModel, EmailStr, AnyUrl, field_validator, model_validator, computed_field
 from typing import List, Dict, Annotated
 
 class Patient(BaseModel):
@@ -14,6 +14,10 @@ class Patient(BaseModel):
     def validate_emergency_contact(cls, model):
         if model.age > 60 and 'emergency_contact' not in model.contact_details:
             raise ValueError('Emergency Contact of Patient older than 60 is mandatory')
+        
+        if model.weight > 70 and 'obesity_contact' not in model.contact_details:
+            raise ValueError('Obesity contact must be given for patients weighing over 70kgs')
+        
         return model
     
 
@@ -23,7 +27,8 @@ patient1 = {
     'email':'dhansh@gmail.com',
     'contact_details':{
         'phone_no':'6025654666',
-        'emergency_contact':'9980950515'
+        'emergency_contact':'9980950515',
+        'obesity_contact':'Go for a run mofo'
         },
     'weight':76.2,
     'married':True,
