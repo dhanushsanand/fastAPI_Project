@@ -29,7 +29,7 @@ class Patient(BaseModel):
         return model
     
     @computed_field
-    def calculate_bmi(self)->float:
+    def bmi(self)->float:
         bmi = round(self.weight/(self.height**2),2)
         return bmi
     
@@ -50,7 +50,7 @@ patient = Patient(**patient1)
 def insert_patient_details(patient:Patient):
     print(patient.name)
     print(patient.contact_details)
-    print('BMI', patient.calculate_bmi)
+    print('BMI', patient.bmi)
     print('Inserted Patient Details into DB')
  
 insert_patient_details(patient)       
