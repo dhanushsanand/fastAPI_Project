@@ -1,5 +1,6 @@
 fastapi
 pydantic
 uvicorn
-pydantic[email]
-pydantic[]
+pandas
+scikit-learn
+numpy
